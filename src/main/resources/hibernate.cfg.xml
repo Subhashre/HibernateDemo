@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-configuration PUBLIC
+  "-//Hibernate/Hibernate Configuration DTD//EN"
+  "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+
+		<!-- Generic parameters common to all Databases -->
+
+		<property name="show_sql">true</property>
+		<!-- <property name="use_outer_join">true</property> -->
+
+		<property name="connection.pool_size">1</property>
+		<!-- <property name="statement_cache.size">2</property> -->
+		<property name="hbm2ddl.auto">create</property>
+		<!-- Without it, some queries fail in MS SQL. XWiki doesn't need scrollable 
+			result sets, anyway. -->
+		<!-- <property name="jdbc.use_scrollable_resultset">false</property> -->
+
+		<property name="connection.url">jdbc:postgresql://${env.OPENSHIFT_POSTGRESQL_DB_HOST}:${env.OPENSHIFT_POSTGRESQL_DB_PORT}/${env.OPENSHIFT_APP_NAME}</property>
+		<property name="connection.username">${env.OPENSHIFT_POSTGRESQL_DB_USERNAME}</property>
+		<property name="connection.password">${env.OPENSHIFT_POSTGRESQL_DB_PASSWORD}</property>
+		<property name="connection.driver_class">org.postgresql.Driver</property>
+		<property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+
+		<!-- <property name="jdbc.use_streams_for_binary">false</property> <property 
+			name="xwiki.virtual_mode">schema</property> <mapping resource="xwiki.postgresql.hbm.xml"/> 
+			<mapping resource="feeds.hbm.xml"/> <mapping resource="activitystream.hbm.xml"/> 
+			<mapping resource="instance.hbm.xml"/> -->
+
+		<mapping class="com.subha.org.dto.UserDetails" />
+
+
+	</session-factory>
+</hibernate-configuration>
